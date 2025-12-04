@@ -10,7 +10,7 @@ CORS_ALLOW_ALL_ORIGINS = True
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'catalogo_ropa',
+        'NAME': 'desechable',
         'USER': 'postgres',
         'PASSWORD': 'example',
         'HOST': '127.0.0.1',

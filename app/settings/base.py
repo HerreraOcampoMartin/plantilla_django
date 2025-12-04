@@ -31,6 +31,9 @@ BASE_APPS = [
 
 LOCAL_APPS = [
     'core.apps.CoreConfig',
+    'api',
+    'persistencia',
+    'casos_de_uso'
 ]
 
 THIRD_PARTY_APPS = [
@@ -47,7 +50,7 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-    'corsheaders.middleware.CorsMiddleware', # Before common middleware
+    'corsheaders.middleware.CorsMiddleware', # Antes del middleware de Common
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -55,13 +58,13 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'catalogo_ropa.urls'
+ROOT_URLCONF = 'app.urls'
 
 
 SECRET_KEY = 'django-insecure-oe%b28pc4y8%)n#k2vqv8*7p!**7m-75lvk7k&q#u!zx+q7k^+'
 
 
-WSGI_APPLICATION = 'catalogo_ropa.wsgi.application'
+WSGI_APPLICATION = 'app.wsgi.application'
 
 
 # Configuración de templates de Django
@@ -138,7 +141,7 @@ REST_FRAMEWORK = {
 
 # Para generar documentación de la API
 SPECTACULAR_SETTINGS = {
-    'TITLE': 'API de Catálogo de Ropa',
+    'TITLE': 'API',
     'DESCRIPTION': 'Documentación de los endpoints del sistema',
     'VERSION': '1.0.0',
     'SERVE_INCLUDE_SCHEMA': False,

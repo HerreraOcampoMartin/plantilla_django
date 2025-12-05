@@ -10,7 +10,7 @@ TModel = TypeVar('TModel', bound=models.Model) # TODO: cambiar a modelo con elim
 TRepository = TypeVar('TRepository', bound='IRepository')
 
 
-class ViewSetBase(viewsets.ModelViewSet):
+class ControladorBase(viewsets.ModelViewSet):
     model: Type[TModel] = None
     serializer_class: Type[Serializer] = None
     repository_class: Type[TRepository] = None

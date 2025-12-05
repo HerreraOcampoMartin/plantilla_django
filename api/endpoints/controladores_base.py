@@ -6,7 +6,7 @@ from rest_framework.exceptions import NotFound
 from rest_framework.serializers import Serializer
 from casos_de_uso.interfaces.interfaces import IRepository
 
-TModel = TypeVar('TModel', bound=models.Model) # TODO: cambiar a modelo con eliminación lógica
+TModel = TypeVar('TModel', bound=models.Model)
 TRepository = TypeVar('TRepository', bound='IRepository')
 
 

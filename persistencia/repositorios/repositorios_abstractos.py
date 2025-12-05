@@ -4,7 +4,7 @@ from django.db import models
 
 T = TypeVar('T', bound=models.Model)
 
-class BaseDjangoORMRepository(IRepository[T], Generic[T]):
+class RepositorioBaseDjangoORM(IRepository[T], Generic[T]):
     """Implementación base genérica para el ORM de Django."""
 
     def __init__(self, model: type[models.Model]):

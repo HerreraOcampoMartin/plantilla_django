@@ -1,6 +1,7 @@
 from casos_de_uso.interfaces.interfaces import IRepository
 from typing import TypeVar, Generic, Optional, List
 from django.db import models
+from core.modelos.modelos_abstractos import ModeloEliminacionLogica
 
 T = TypeVar('T', bound=models.Model)
 
@@ -47,4 +48,46 @@ class RepositorioBaseDjangoORM(IRepository[T], Generic[T]):
 
     def eliminar_por_id(self, entidad_id: int):
         self.model.objects.get(pk=entidad_id).delete()
+
+
+# ============================================
+# = GESTIÓN DE ELIMINACIÓN LÓGICA
+# ============================================
+T_EliminacionLogica = TypeVar('T_EliminacionLogica', bound=ModeloEliminacionLogica)
+
+class RepositorioBaseEliminacionLogicaDjangoORM(RepositorioBaseDjangoORM[T_EliminacionLogica], Generic[T_EliminacionLogica]):
+
+    def guardar(self, entidad: T):
+        if not entidad.pk:
+            entidad.eliminado = False
+
+        super().guardar(entidad)
+
+    def crear_desde_dict(self, data: dict) -> Optional[T]:
+        if 'eliminado' in data:
+            data['eliminado'] = False
+
+        return super().crear_desde_dict(data)
+
+    def obtener_por_id(self, entidad_id: int) -> Optional[T]:
+        try:
+            return self.model.objects.filter(eliminado=False).get(pk=entidad_id)
+        except self.model.DoesNotExist:
+            return None
+
+    def obtener_todos(self) -> List[T]:
+        return list(self.model.objects.filter(eliminado=False).all())
+
+    def eliminar_por_id(self, entidad_id: int):
+        try:
+            instancia = self.model.objects.get(pk=entidad_id, eliminado=False)
+            instancia.eliminado = True
+            instancia.save()
+
+            # Opcional: Si quieres ejecutar señales de pre_delete/post_delete,
+            # puedes llamar a instancia.delete() pero DEBES sobrescribir
+            # el método delete() del modelo para que solo haga la eliminación lógica.
+
+        except self.model.DoesNotExist:
+            pass
 

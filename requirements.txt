@@ -11,3 +11,6 @@ pytest-django
 gunicorn
 drf-spectacular
 whitenoise
+#django-storages
+#Pillow
+#boto3

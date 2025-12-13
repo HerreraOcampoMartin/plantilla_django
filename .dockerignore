@@ -1,0 +1,25 @@
+# Archivos y directorios de entornos virtuales y paquetes locales
+venv/
+.venv/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+
+# Archivos y directorios de logs y bases de datos locales
+*.log
+*.sqlite3
+db.sqlite3
+/media/
+/static/ # Excluir si ya estás usando 'collectstatic' en el docker-compose
+.vscode/ # Configuración del editor
+
+# Archivos de Git
+.git
+.gitignore
+
+# Archivos temporales o específicos del SO
+*~
+*.swp
+.DS_Store
